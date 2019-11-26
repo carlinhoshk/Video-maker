@@ -1,4 +1,5 @@
 const algorithmia = require('algorithmia')
+const algorithmiaApiKey = require('../credentials/algorithmia.json').apiKey
 const setenceBoundaryDetection = require('sbd')
 
 async function robot(content) {
@@ -7,7 +8,7 @@ async function robot(content) {
     breakContentIntoSentences(content)
 
      async function fetchContentFromWikipedia(content) {
-        const algorithmiaAuthenticated = algorithmia("sims6KtCDQ9L/ENVgFb2NlYa5oH1")
+        const algorithmiaAuthenticated = algorithmia(algorithmiaApiKey)
         const wikipediaAlgorithm = algorithmiaAuthenticated.algo('web/WikipediaParser/0.1.2')
         const wikipediaResponde = await wikipediaAlgorithm.pipe(content.searchTerm)
         const wikipediaContent = wikipediaResponde.get()
